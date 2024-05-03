@@ -20,7 +20,8 @@ export class MysqlDB {
       port,
       database,
       entities: [Incidence],
-      synchronize: true
+      synchronize: true,
+      logging: true
     })
 
     try {

@@ -25,6 +25,9 @@ export class Server {
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
 
+    //* Routes
+    this.app.use(this.routes)
+
     //* Cors
     this.app.use(this.cors())
 

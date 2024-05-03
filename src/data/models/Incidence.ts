@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, BaseEntity } 
 
 @Entity('incidents')
 export class Incidence extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number
 
   @Column("varchar", {
@@ -24,7 +24,8 @@ export class Incidence extends BaseEntity {
   location: string
 
   @Column("varchar", {
-    length: 100
+    length: 100,
+    default: ''
   })
   image: string
 
