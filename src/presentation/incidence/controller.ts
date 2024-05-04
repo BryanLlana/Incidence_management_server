@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, response } from "express";
 import { CustomError } from "../../domain/errors";
 import { IncidenceService } from "../services";
 import { CreateIncidenceDto, UpdateIncidenceDto } from "../../domain/dtos";
@@ -48,6 +48,8 @@ export class IncidenceController {
   }
 
   public deleteIncidence = (request: Request, res: Response) => {
-
+    this.incidenceService.deleteIncidence(request.params.id)
+      .then(result => res.status(200).json(result))
+      .catch(error => this.handleError(error, response))
   }
 }

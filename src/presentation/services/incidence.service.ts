@@ -58,7 +58,19 @@ export class IncidenceService {
         message: 'Incidencia actualizada correctamente'
       }
     } catch (error) {
-      throw CustomError.badRequest('Internal server error')
+      throw CustomError.badRequest('Internal server')
+    }
+  }
+
+  public async deleteIncidence (id: string) {
+    const incidence = await this.getIncidence(id)
+    try {
+      await Incidence.remove(incidence)
+      return { 
+        message: 'Incidence successfully removed'
+      }
+    } catch (error) {
+      throw CustomError.internalServer('Internal server')
     }
   }
 }
