@@ -25,4 +25,10 @@ export class IncidenceController {
       .then(result => response.status(200).json(result))
       .catch(error => this.handleError(error, response))
   }
+
+  public getIncidents = (request: Request, response: Response) => {
+    this.incidenceService.getIncidents()
+      .then(result => response.status(200).json(result))
+      .catch(error => this.handleError(error, response))
+  }
 }

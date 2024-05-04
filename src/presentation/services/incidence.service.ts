@@ -5,7 +5,7 @@ import { CustomError } from "../../domain/errors";
 export class IncidenceService {
   constructor() {}
 
-  public async  createIncidence (createIncidenceDto: CreateIncidenceDto) {
+  public async createIncidence (createIncidenceDto: CreateIncidenceDto) {
     try {
       const { title, description, type, location } = createIncidenceDto
       const incidence = new Incidence()
@@ -15,6 +15,15 @@ export class IncidenceService {
       incidence.location = location
       await incidence.save()
       return { message: 'Incident created successfully'}
+    } catch (error) {
+      throw CustomError.internalServer('Internal server')
+    }
+  }
+
+  public async getIncidents () {
+    try {
+      const incidents = Incidence.find()
+      return incidents
     } catch (error) {
       throw CustomError.internalServer('Internal server')
     }

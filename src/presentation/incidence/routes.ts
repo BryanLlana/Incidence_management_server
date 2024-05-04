@@ -9,6 +9,7 @@ export class IncidenceRoutes {
     const controller = new IncidenceController(service)
 
     router.post('/', controller.createIncidence)
+    router.get('/', controller.getIncidents)
 
     return router
   }
