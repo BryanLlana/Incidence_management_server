@@ -4,7 +4,7 @@ import { User } from './User'
 @Entity('incidents')
 export class Incidence extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id: string
 
   @Column("varchar", {
     length: 100
@@ -38,6 +38,8 @@ export class Incidence extends BaseEntity {
   @CreateDateColumn()
   createdAt: Date
 
-  @ManyToOne(() => User, (user) => user.incidents)
-  userId: number
+  @ManyToOne(() => User, (user) => user.incidents, {
+    eager: true
+  })
+  user: number
 }

@@ -10,6 +10,9 @@ export class IncidenceRoutes {
 
     router.post('/', controller.createIncidence)
     router.get('/', controller.getIncidents)
+    router.get('/:id', controller.getIncidence)
+    router.put('/:id', controller.updateIncidence)
+    router.delete('/:id', controller.deleteIncidence)
 
     return router
   }

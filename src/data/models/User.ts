@@ -21,6 +21,6 @@ export class User extends BaseEntity {
   })
   role: string
 
-  @OneToMany(() => Incidence, (incidence) => incidence.userId)
+  @OneToMany(() => Incidence, (incidence) => incidence.user)
   incidents: Incidence[]
 }

@@ -13,7 +13,7 @@ export class IncidenceService {
       incidence.description = description
       incidence.type = type
       incidence.location = location
-      incidence.userId = userId
+      incidence.user = userId
       await incidence.save()
       return { message: 'Incident created successfully'}
     } catch (error) {
@@ -28,5 +28,16 @@ export class IncidenceService {
     } catch (error) {
       throw CustomError.internalServer('Internal server')
     }
+  }
+
+  public async getIncidence (id: string) {
+    const incidence = await Incidence.findOne({
+      where: {
+        id
+      }
+    })
+
+    if (!incidence) throw CustomError.notFound('Incidence not found')
+    return incidence
   }
 }

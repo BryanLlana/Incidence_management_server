@@ -31,4 +31,18 @@ export class IncidenceController {
       .then(result => response.status(200).json(result))
       .catch(error => this.handleError(error, response))
   }
+
+  public getIncidence = (request: Request, response: Response) => {
+    this.incidenceService.getIncidence(request.params.id)
+      .then(result => response.status(200).json(result))
+      .catch(error => this.handleError(error, response))
+  }
+
+  public updateIncidence = (request: Request, response: Response) => {
+
+  }
+
+  public deleteIncidence = (request: Request, res: Response) => {
+
+  }
 }
