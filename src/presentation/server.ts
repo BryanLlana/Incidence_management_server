@@ -21,15 +21,16 @@ export class Server {
   }
 
   public start () {
+    //* Cors
+    this.app.use(this.cors())
+    
     //* Middlewares
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
-
+    
     //* Routes
     this.app.use(this.routes)
 
-    //* Cors
-    this.app.use(this.cors())
 
     this.serverListener = this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`)

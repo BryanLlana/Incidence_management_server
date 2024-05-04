@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, BaseEntity } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, BaseEntity, ManyToOne } from 'typeorm'
+import { User } from './User'
 
 @Entity('incidents')
 export class Incidence extends BaseEntity {
@@ -36,4 +37,7 @@ export class Incidence extends BaseEntity {
 
   @CreateDateColumn()
   createdAt: Date
+
+  @ManyToOne(() => User, (user) => user.incidents)
+  userId: number
 }

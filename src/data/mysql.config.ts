@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm'
 import { Incidence } from './models/Incidence'
+import { User } from './models/User'
 
 interface Options {
   username: string,
@@ -19,9 +20,8 @@ export class MysqlDB {
       password,
       port,
       database,
-      entities: [Incidence],
-      synchronize: true,
-      logging: true
+      entities: [Incidence, User],
+      synchronize: true
     })
 
     try {
