@@ -40,4 +40,25 @@ export class IncidenceService {
     if (!incidence) throw CustomError.notFound('Incidence not found')
     return incidence
   }
+
+  public async updateIncidence (id: string, values: {[key: string]: any}) {
+    if (Object.values(values).length === 0) {
+      throw CustomError.badRequest('You must enter a field that you want to update')
+    }
+    const {userId, ...form} = values
+    await this.getIncidence(id)
+    try {
+      const incidenceUpdate = await Incidence.preload({
+        id,
+        ...form,
+        user: userId
+      })
+      await Incidence.save(incidenceUpdate!)
+      return {
+        message: 'Incidencia actualizada correctamente'
+      }
+    } catch (error) {
+      throw CustomError.badRequest('Internal server error')
+    }
+  }
 }

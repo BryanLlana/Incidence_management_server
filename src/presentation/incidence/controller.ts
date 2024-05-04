@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CustomError } from "../../domain/errors";
 import { IncidenceService } from "../services";
-import { CreateIncidenceDto } from "../../domain/dtos";
+import { CreateIncidenceDto, UpdateIncidenceDto } from "../../domain/dtos";
 
 export class IncidenceController {
   constructor(
@@ -39,7 +39,12 @@ export class IncidenceController {
   }
 
   public updateIncidence = (request: Request, response: Response) => {
+    const [errors, updateIncidenceDto] = UpdateIncidenceDto.create(request.body)
+    if (errors) return response.status(400).json({ errors })
 
+    this.incidenceService.updateIncidence(request.params.id, updateIncidenceDto?.values!)
+      .then(result => response.status(200).json(result))
+      .catch(error => this.handleError(error, response))
   }
 
   public deleteIncidence = (request: Request, res: Response) => {
