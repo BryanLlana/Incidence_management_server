@@ -1,4 +1,5 @@
 import express, { Router } from 'express'
+import fileupload from 'express-fileupload'
 
 interface Options {
   port: number,
@@ -27,6 +28,9 @@ export class Server {
     //* Middlewares
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(fileupload({
+      limits: { fileSize: 50 * 1024 * 1024}
+    }))
     
     //* Routes
     this.app.use(this.routes)

@@ -4,11 +4,12 @@ export class CreateIncidenceDto {
     public readonly description: string,
     public readonly type: string,
     public readonly location: string,
-    public readonly userId: number
+    public readonly userId: number,
+    public readonly image: string
   ){}
 
   static create(object: { [key: string]: any }): [Object?, CreateIncidenceDto?] {
-    const { title, description, type, location, userId } = object
+    const { title, description, type, location, userId, image } = object
     const errors: { [key: string]: any } = {}
 
     if (!title) errors.title = "Title is required"
@@ -16,8 +17,9 @@ export class CreateIncidenceDto {
     if (!type) errors.type = "Type is required"
     if (!location) errors.location = "Location is required"
     if (!userId) errors.userId = "User id is required"
+    if (!image) errors.image = "Image is required"
 
     if (Object.values(errors).length > 0) return [errors, undefined]
-    return [undefined, new CreateIncidenceDto(title, description, type, location, userId)]
+    return [undefined, new CreateIncidenceDto(title, description, type, location, userId, image)]
   }
 }

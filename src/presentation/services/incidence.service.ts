@@ -7,13 +7,14 @@ export class IncidenceService {
 
   public async createIncidence (createIncidenceDto: CreateIncidenceDto) {
     try {
-      const { title, description, type, location, userId } = createIncidenceDto
+      const { title, description, type, location, userId, image } = createIncidenceDto
       const incidence = new Incidence()
       incidence.title = title
       incidence.description = description
       incidence.type = type
       incidence.location = location
       incidence.user = userId
+      incidence.image = image
       await incidence.save()
       return { message: 'Incident created successfully'}
     } catch (error) {
