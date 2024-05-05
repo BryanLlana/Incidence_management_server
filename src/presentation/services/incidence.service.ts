@@ -56,7 +56,7 @@ export class IncidenceService {
       })
       await Incidence.save(incidenceUpdate!)
       return {
-        message: 'Incidencia actualizada correctamente'
+        message: 'Incidence updated correctly'
       }
     } catch (error) {
       throw CustomError.badRequest('Internal server')
@@ -69,6 +69,22 @@ export class IncidenceService {
       await Incidence.remove(incidence)
       return { 
         message: 'Incidence successfully removed'
+      }
+    } catch (error) {
+      throw CustomError.internalServer('Internal server')
+    }
+  }
+
+  public async updateStatus (id: string) {
+    const incidence = await this.getIncidence(id)
+    try {
+      const incidenceUpdate = await Incidence.preload({
+        id,
+        status: !incidence.status
+      })
+      await Incidence.save(incidenceUpdate!)
+      return {
+        message: 'Status updated correctly'
       }
     } catch (error) {
       throw CustomError.internalServer('Internal server')

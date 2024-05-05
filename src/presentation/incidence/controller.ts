@@ -52,4 +52,10 @@ export class IncidenceController {
       .then(result => res.status(200).json(result))
       .catch(error => this.handleError(error, response))
   }
+
+  public updateStatus = (request: Request, response: Response) => {
+    this.incidenceService.updateStatus(request.params.id)
+      .then(result => response.status(200).json(result))
+      .catch(error => this.handleError(error, response))
+  }
 }
